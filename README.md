@@ -1,18 +1,27 @@
-# SenseCAP Indicator project template
 
-This is a standalone project, 'indicator_basis', independent from the [SenseCAP Indicator ESP32 example](https://github.com/Seeed-Solution/sensecap_indicator_esp32).
+# Baisc communication demo between SenseCAP Indicator and XIAO (Via Wio-E5)
+
+## Description
+This demo will show you how to use SenseCAP Indicator to get sensor data from XIAO via Wio-E5.
+
+this projection has made a simple frame between two device to communicate with each other. The XIAO will send the sensor data(Payload) to Wio-E5, and Wio-E5 will forward the Payload to SenseCAP Indicator. The SenseCAP Indicator will phrase the payload and show the data on the screen.
+
+## Table of Contents
+
+
+## Installation
+For convinent, I use PlatformIO to manage the project. You can also use Arduino IDE to manage the project. But you need to install the following libraries manually.
+### Components
+- Device:
+  - [SenseCAP Indicator](https://www.seeedstudio.com/SenseCAP-Indicator-p-4739.html)
+  - [XIAO](https://wiki.seeedstudio.com/Seeeduino-XIAO/)
+  - [Wio-E5](https://www.seeedstudio.com/Wio-E5-Edge-Computing-Board-p-4419.html)
+- Sensors:
+  - SEN54 (you can also use other sensors, but you need to modify the code)
+### Libraries
 
 ## Usage
-
-> On GitHub, utilize it as a template.
-
-The two resources mentioned are commonly used to land the SenseCAP Indicator ESP32 project.
-- [The ESP-IDF examples↗](https://github.com/espressif/esp-idf/tree/master/examples) from Espressif. These examples cover a wide range of applications and can be very helpful when developing projects based on the ESP32 microcontroller.
-- [The SenseCAP Indicator ESP32 example↗](https://github.com/Seeed-Solution/sensecap_indicator_esp32) from Seeed Solution. This repository contains the SDK for the SenseCAP Indicator device. It provides several examples demonstrating how to utilize the ESP32 functions for various applications, such as displaying sensor data, implementing time and configuration functions, and facilitating communication using LoRa.
-
-
-## changelog
-
-### v1.0.0 ###
-2023/07/26
-* Initial version.
+## License
+## Contributing
+## Tests
+## Questions
