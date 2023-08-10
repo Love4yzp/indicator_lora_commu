@@ -4,8 +4,8 @@
 
 #define DEVICE_SEN54
 
-#if defined(DEVICE_SEN54)
-#elif defined(DEVICE_SEN55)
+#if defined( DEVICE_SEN54 )
+#elif defined( DEVICE_SEN55 )
 #else
 #error "Please define a device in the compiler options."
 #endif
@@ -32,7 +32,7 @@ typedef union {
 #endif
 } SEN5xData_t;
 
-void phraseSEN5xData(uint8_t *data_arry, SEN5xData_t *SEN5x);
-void prinSEN5xData(const SEN5xData_t *SEN5x);
+void phraseSEN5xData( uint8_t *data_arry, SEN5xData_t *SEN5x );
+void prinSEN5xData( const SEN5xData_t *SEN5x );
 
 #endif // PAYLOAD_SEN5X_H

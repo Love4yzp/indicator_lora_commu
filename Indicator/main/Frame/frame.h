@@ -24,9 +24,9 @@ typedef struct
     uint16_t crc;
 } Frame_t;
 
-Frame_t *parsePayload(uint8_t *payload, uint8_t length);
-void deleteFrame(Frame_t *frame);
+Frame_t *parsePayload( uint8_t *payload, uint8_t length );
+void deleteFrame( Frame_t *frame );
 
-uint16_t crc16_ccitt(const uint8_t *data, size_t length);
+uint16_t crc16_ccitt( const uint8_t *data, size_t length );
 
 #endif
