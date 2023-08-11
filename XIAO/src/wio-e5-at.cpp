@@ -79,7 +79,7 @@ int Radio::ATCommand(const char *expected_response, int timeout, const char *com
     snprintf(send_buffer, sizeof(send_buffer), command_format, command_args);
 
     SERIAL_DEBUG.print("<<<" + String(send_buffer));
-    _serial.print(send_buffer); // Send the command to the ESP8266
+    _serial.print(send_buffer); // Send the command to the Wio-E5
 
     int index = 0;
     if (expected_response == NULL) {
@@ -171,8 +171,8 @@ void Radio::receivePacket(uint32_t time_out) {
             position = strstr(recv_buffer, data_ack);
             if (position != NULL) {
                 char hexString[50] = {0};
-                int ret            = sscanf(position, "+TEST: RX \"%[^\"]\"", hexString); // 提取字符串
-                clean_serial(_serial);                                                    // 检查 sscanf 是否成功读取了一个字符串
+                int ret            = sscanf(position, "+TEST: RX \"%[^\"]\"", hexString); // extract the payload
+                clean_serial(_serial);
                 if (ret == 1) {
                     _string = String(hexString);
                     SERIAL_DEBUG.println("Payload:" + _string);

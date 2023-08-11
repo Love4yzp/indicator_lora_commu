@@ -7,7 +7,8 @@ const char *dataIDStrings[] = {
 #undef X
 
 // Function to convert enum to string
-const char *dataIDToString( enum dataID_t value ) {
+const char *dataIDToString( enum dataID_t value )
+{
     if ( value >= ID_MIN && value < ID_MAX ) {
         return dataIDStrings[value];
     }

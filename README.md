@@ -79,3 +79,7 @@ I (95632) sen5x_: ambientHumidity: 5389
 I (95636) sen5x_: ambientTemperature: 5990
 I (95641) sen5x_: vocIndex: 980
 ```
+
+## LVGL
+In this project, we use SquareLine Studio to implement LVGL code to display the data on the screen.
+the SquareLine Studio version in this project is 1.3.1.

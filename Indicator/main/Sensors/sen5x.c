@@ -1,7 +1,8 @@
 #include "sen5x.h"
 #include "esp_log.h"
 
-void phraseSEN5xData( uint8_t *data_arry, SEN5xData_t *SEN5x ) {
+void phraseSEN5xData( uint8_t *data_arry, SEN5xData_t *SEN5x )
+{
     for ( uint8_t i = 0; i < sizeof( SEN5xData_t ); i++ ) {
         SEN5x->data[i] = data_arry[2 * i] << 8 | data_arry[2 * i + 1];
     }
@@ -17,7 +18,8 @@ void phraseSEN5xData( uint8_t *data_arry, SEN5xData_t *SEN5x ) {
     // #endif
 }
 
-void prinSEN5xData( const SEN5xData_t *SEN5x ) {
+void prinSEN5xData( const SEN5xData_t *SEN5x )
+{
     static const char *TAG = "sen5x_";
     ESP_LOGI( TAG, "massConcentrationPm1p0: %d", SEN5x->massConcentrationPm1p0 );
     ESP_LOGI( TAG, "massConcentrationPm2p5: %d", SEN5x->massConcentrationPm2p5 );

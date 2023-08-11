@@ -2,7 +2,8 @@
 #include "esp_log.h"
 
 // #define DEBUG
-Frame_t *parsePayload( uint8_t *payload, uint8_t length ) {
+Frame_t *parsePayload( uint8_t *payload, uint8_t length )
+{
     Frame_t *frame = (Frame_t *)malloc( sizeof( Frame_t ) );
     if ( frame == NULL ) {
         ESP_LOGE( "parsePayload", "Failed to allocate memory for frame" );
@@ -10,9 +11,15 @@ Frame_t *parsePayload( uint8_t *payload, uint8_t length ) {
     }
 
     frame->topic = (enum topics)payload[0];
+#ifdef DEBUG
     ESP_LOGW( "parsePayload", "topic: %d", frame->topic );
+#endif
+
     frame->dataLength = payload[1];
+#ifdef DEBUG
     ESP_LOGW( "parsePayload", "dataLength: %d", frame->dataLength );
+#endif
+
     frame->data = (uint8_t *)malloc( frame->dataLength );
     if ( frame->data == NULL ) {
         ESP_LOGE( "parsePayload", "Failed to allocate memory for frame data" );
@@ -21,9 +28,11 @@ Frame_t *parsePayload( uint8_t *payload, uint8_t length ) {
     }
 
     memcpy( frame->data, payload + 2, frame->dataLength );
+#ifdef DEBUG
     for ( int i = 0; i < frame->dataLength; i++ ) {
         ESP_LOGW( "parsePayload", "payload[%d]: %02X", i, payload[i + 2] );
     }
+#endif
     frame->crc = (uint16_t)payload[length - 2] << 8 | (uint16_t)payload[length - 1];
 
     if ( frame->crc != crc16_ccitt( payload, length - 2 ) ) {
@@ -36,12 +45,14 @@ Frame_t *parsePayload( uint8_t *payload, uint8_t length ) {
     return frame;
 }
 
-void deleteFrame( Frame_t *frame ) {
+void deleteFrame( Frame_t *frame )
+{
     free( frame->data );
     free( frame );
 }
 
-uint16_t crc16_ccitt( const uint8_t *data, size_t length ) {
+uint16_t crc16_ccitt( const uint8_t *data, size_t length )
+{
     uint16_t crc = 0xFFFF;
 
     for ( size_t i = 0; i < length; i++ ) {

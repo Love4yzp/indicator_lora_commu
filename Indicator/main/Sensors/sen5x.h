@@ -10,6 +10,7 @@
 #error "Please define a device in the compiler options."
 #endif
 
+#pragma pack(push, 1)
 typedef union {
     struct
     {
@@ -17,9 +18,9 @@ typedef union {
         uint16_t massConcentrationPm2p5;
         uint16_t massConcentrationPm4p0;
         uint16_t massConcentrationPm10p0;
-        int16_t ambientHumidity;
-        int16_t ambientTemperature;
-        int16_t vocIndex;
+        int16_t  ambientHumidity;
+        int16_t  ambientTemperature;
+        int16_t  vocIndex;
 #ifdef DEVICE_SEN55
         int16_t noxIndex;
 #endif
@@ -31,6 +32,7 @@ typedef union {
     int16_t data[7];
 #endif
 } SEN5xData_t;
+#pragma pack(pop)
 
 void phraseSEN5xData( uint8_t *data_arry, SEN5xData_t *SEN5x );
 void prinSEN5xData( const SEN5xData_t *SEN5x );
