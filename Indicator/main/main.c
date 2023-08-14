@@ -89,6 +89,8 @@ void OnRxDone( uint8_t *payload, uint16_t size, int16_t rssi, int8_t snr )
 // 1. Define an event handler function.
 static void __view_event_handler( void *handler_args, esp_event_base_t base, int32_t id, void *event_data );
 
+// #define USING_LVGL // if you want to use lvgl, you need to define USING_LVGL
+
 void app_main( void )
 {
     ESP_LOGI( "", SENSECAP, VERSION, __DATE__, __TIME__ );
@@ -128,10 +130,11 @@ void app_main( void )
                                                                    VIEW_EVENT_BASE, i,
                                                                    __view_event_handler, NULL, NULL ) );
     }
+#ifdef USING_LVGL
     /*Screen setup*/
     lv_port_init();
     ui_init();
-
+#endif
     while ( 1 ) {
         vTaskDelay( pdMS_TO_TICKS( 10000 ) );
     }
@@ -144,6 +147,8 @@ static void __view_event_handler( void *handler_args, esp_event_base_t base, int
         case VIEW_EVENT_TOPICS_SEN5x:
             SEN5xData_t *view_sen5x_data = (SEN5xData_t *)event_data;
             prinSEN5xData( view_sen5x_data );
+
+#ifdef USING_LVGL
             char  data_buf[10];
             float pm25 = view_sen5x_data->massConcentrationPm2p5 / 10.0f;
             float voc  = view_sen5x_data->vocIndex / 10.0f;
@@ -156,13 +161,13 @@ static void __view_event_handler( void *handler_args, esp_event_base_t base, int
             snprintf( data_buf, sizeof( data_buf ), "%.f", voc );
             lv_label_set_text( ui_sensor_data_voc, data_buf );
 
-
             // // change the value of ui_Arc_humi
             snprintf( data_buf, sizeof( data_buf ), "%.2f", humi );
             lv_label_set_text( ui_sensor_data_humi, data_buf );
 
             // // ui_Slider_temp
             lv_slider_set_value( ui_Slider_temp, temp, LV_ANIM_OFF );
+#endif
             break;
     }
     lv_port_sem_give();
